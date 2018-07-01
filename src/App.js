@@ -1,8 +1,10 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import * as BooksAPI from "./BooksAPI";
+import "./App.css";
+
 import SearchPage from "./SearchPage";
 import Bookshelf from "./Bookshelf";
-import "./App.css";
 
 class BooksApp extends React.Component {
   state = {
@@ -33,11 +35,42 @@ class BooksApp extends React.Component {
       this.setState(() => ({ query: "" }));
     }
   };
+
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => {
+          if (b.id === book.id) {
+            return (book.shelf = shelf);
+          } else {
+            return book;
+          }
+        })
+      }));
+    });
+  };
+
   render() {
     return (
       <div className="app">
-        <Route exact path="/" component={Bookshelf} />
-        <Route path="/search" component={SearchPage} />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Bookshelf state={this.state} update={this.updateShelf} />
+          )}
+        />
+        <Route
+          path="/search"
+          update={this.updateShelf}
+          render={() => (
+            <SearchPage
+              state={this.state}
+              update={this.updateShelf}
+              search={this.searchBooks}
+            />
+          )}
+        />
       </div>
     );
   }
