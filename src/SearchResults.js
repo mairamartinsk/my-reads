@@ -7,9 +7,9 @@ class SearchResults extends React.Component {
 
     if (results.length > 0 && query !== "") {
       results.forEach(result => {
-        const matchBook = books.filter(book => book.id === result.id);
-        if (matchBook.length > 0) {
-          displayResults.push(...matchBook);
+        const booksMatch = books.filter(book => book.id === result.id);
+        if (booksMatch.length > 0) {
+          displayResults.push(...booksMatch);
         } else {
           displayResults.push(result);
         }
@@ -26,6 +26,7 @@ class SearchResults extends React.Component {
                   <img
                     src={eachBook.imageLinks.thumbnail}
                     className="book-cover"
+                    alt={eachBook.title}
                     style={{ width: 128 }}
                   />
                 )}
@@ -60,7 +61,12 @@ class SearchResults extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
-              <div className="book-authors">{eachBook.authors}</div>
+              {eachBook.authors &&
+                eachBook.authors.map(author => (
+                  <div className="book-authors" key={author}>
+                    {author}
+                  </div>
+                ))}
             </div>
           </li>
         ))}

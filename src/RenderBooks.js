@@ -13,6 +13,7 @@ class RenderBooks extends React.Component {
                 {eachBook.imageLinks && (
                   <img
                     src={eachBook.imageLinks.thumbnail}
+                    alt={eachBook.title}
                     className="book-cover"
                     style={{ width: 128 }}
                   />
@@ -48,7 +49,12 @@ class RenderBooks extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
-              <div className="book-authors">{eachBook.authors}</div>
+              {eachBook.authors &&
+                eachBook.authors.map(author => (
+                  <div className="book-authors" key={author}>
+                    {author}
+                  </div>
+                ))}
             </div>
           </li>
         ))}
