@@ -22,6 +22,13 @@ class SearchResults extends React.Component {
           <li key={eachBook.id}>
             <div className="book">
               <div className="book-top">
+                {eachBook.imageLinks && (
+                  <img
+                    src={eachBook.imageLinks.thumbnail}
+                    className="book-cover"
+                    style={{ width: 128 }}
+                  />
+                )}
                 <div
                   className="book-cover"
                   style={{
