@@ -29,13 +29,24 @@ class SearchResults extends React.Component {
                     style={{ width: 128 }}
                   />
                 )}
-                <div
-                  className="book-cover"
-                  style={{
-                    width: 128,
-                    backgroundImage: `${eachBook.imageLinks.thumbnail}`
-                  }}
-                />
+                {!eachBook.imageLinks && (
+                  <div
+                    className="book-cover"
+                    style={{
+                      width: 128,
+                      height: 182,
+                      backgroundColor: "#aaa",
+                      color: "#ccc",
+                      display: "flex",
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    No Image
+                  </div>
+                )}
                 <div className="book-shelf-changer">
                   <select>
                     <option value="move" disabled>
