@@ -2,7 +2,7 @@ import React from "react";
 
 class RenderBooks extends React.Component {
   render() {
-    const { books, onChange } = this.props;
+    const { books, update } = this.props;
 
     return (
       <ol className="books-grid">
@@ -13,6 +13,7 @@ class RenderBooks extends React.Component {
                 {eachBook.imageLinks && (
                   <img
                     src={eachBook.imageLinks.thumbnail}
+                    alt={eachBook.title}
                     className="book-cover"
                     style={{ width: 128 }}
                   />
@@ -36,7 +37,11 @@ class RenderBooks extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
-                  <select>
+                  <select
+                    id={eachBook.id}
+                    value={eachBook.shelf ? eachBook.shelf : "none"}
+                    onChange={e => update(eachBook, e.target.value)}
+                  >
                     <option value="move" disabled>
                       Move to...
                     </option>
@@ -48,7 +53,12 @@ class RenderBooks extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
-              <div className="book-authors">{eachBook.authors}</div>
+              {eachBook.authors &&
+                eachBook.authors.map(author => (
+                  <div className="book-authors" key={author}>
+                    {author}
+                  </div>
+                ))}
             </div>
           </li>
         ))}

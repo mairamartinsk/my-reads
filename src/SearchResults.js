@@ -2,14 +2,14 @@ import React from "react";
 
 class SearchResults extends React.Component {
   render() {
-    const { books, results, query, onChange } = this.props;
+    const { books, results, query, update } = this.props;
     let displayResults = [];
 
     if (results.length > 0 && query !== "") {
       results.forEach(result => {
-        const matchBook = books.filter(book => book.id === result.id);
-        if (matchBook.length > 0) {
-          displayResults.push(...matchBook);
+        const booksMatch = books.filter(book => book.id === result.id);
+        if (booksMatch.length > 0) {
+          displayResults.push(...booksMatch);
         } else {
           displayResults.push(result);
         }
@@ -26,6 +26,7 @@ class SearchResults extends React.Component {
                   <img
                     src={eachBook.imageLinks.thumbnail}
                     className="book-cover"
+                    alt={eachBook.title}
                     style={{ width: 128 }}
                   />
                 )}
@@ -48,7 +49,11 @@ class SearchResults extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
-                  <select>
+                  <select
+                    id={eachBook.id}
+                    value={eachBook.shelf ? eachBook.shelf : "none"}
+                    onChange={e => update(eachBook, e.target.value)}
+                  >
                     <option value="move" disabled>
                       Move to...
                     </option>
@@ -60,7 +65,12 @@ class SearchResults extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
-              <div className="book-authors">{eachBook.authors}</div>
+              {eachBook.authors &&
+                eachBook.authors.map(author => (
+                  <div className="book-authors" key={author}>
+                    {author}
+                  </div>
+                ))}
             </div>
           </li>
         ))}

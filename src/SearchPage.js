@@ -32,7 +32,7 @@ class SearchPage extends React.Component {
             books={state.books}
             results={state.results}
             query={state.query}
-            onChange={update}
+            update={update}
           />
         </div>
       </div>

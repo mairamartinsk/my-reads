@@ -25,7 +25,7 @@ class Bookshelf extends React.Component {
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
-                  <RenderBooks books={booksReading} onChange={update} />
+                  <RenderBooks books={booksReading} update={update} />
                 </div>
               </div>
             )}
@@ -35,7 +35,7 @@ class Bookshelf extends React.Component {
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Want to Read</h2>
                 <div className="bookshelf-books">
-                  <RenderBooks books={booksWantToRead} onChange={update} />
+                  <RenderBooks books={booksWantToRead} update={update} />
                 </div>
               </div>
             )}
@@ -45,7 +45,7 @@ class Bookshelf extends React.Component {
               <div className="bookshelf">
                 <h2 className="bookshelf-title">Read</h2>
                 <div className="bookshelf-books">
-                  <RenderBooks books={booksRead} onChange={update} />
+                  <RenderBooks books={booksRead} update={update} />
                 </div>
               </div>
             )}
