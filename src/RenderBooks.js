@@ -1,20 +1,20 @@
 import React from "react";
-import "./App.css";
 
 class RenderBooks extends React.Component {
   render() {
     const { books, onChange } = this.props;
+
     return (
       <ol className="books-grid">
         {books.map(eachBook => (
-          <li>
+          <li key={eachBook.id}>
             <div className="book">
               <div className="book-top">
-                <div
+                <img
+                  src={eachBook.imageLinks.thumbnail}
                   className="book-cover"
                   style={{
-                    width: 128,
-                    backgroundImage: `${eachBook.imageLinks.thumbnail}`
+                    width: 128
                   }}
                 />
                 <div className="book-shelf-changer">
