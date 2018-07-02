@@ -2,7 +2,7 @@ import React from "react";
 
 class SearchResults extends React.Component {
   render() {
-    const { books, results, query, onChange } = this.props;
+    const { books, results, query, update } = this.props;
     let displayResults = [];
 
     if (results.length > 0 && query !== "") {
@@ -49,7 +49,11 @@ class SearchResults extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
-                  <select>
+                  <select
+                    id={eachBook.id}
+                    value={eachBook.shelf ? eachBook.shelf : "none"}
+                    onChange={e => update(eachBook, e.target.value)}
+                  >
                     <option value="move" disabled>
                       Move to...
                     </option>

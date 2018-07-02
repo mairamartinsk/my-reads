@@ -2,7 +2,7 @@ import React from "react";
 
 class RenderBooks extends React.Component {
   render() {
-    const { books, onChange } = this.props;
+    const { books, update } = this.props;
 
     return (
       <ol className="books-grid">
@@ -37,7 +37,11 @@ class RenderBooks extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
-                  <select>
+                  <select
+                    id={eachBook.id}
+                    value={eachBook.shelf ? eachBook.shelf : "none"}
+                    onChange={e => update(eachBook, e.target.value)}
+                  >
                     <option value="move" disabled>
                       Move to...
                     </option>
