@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SearchResults from "./SearchResults";
 
 class SearchPage extends React.Component {
+  // Simple method to clear input once user quits search page
   clearQueryInput() {
     this.setState({
       query: ""
@@ -10,6 +11,7 @@ class SearchPage extends React.Component {
   }
 
   render() {
+    // Destructure props object
     const { state, update, search } = this.props;
 
     return (
@@ -19,6 +21,7 @@ class SearchPage extends React.Component {
             Close
           </Link>
           <div className="search-books-input-wrapper">
+            {/* Listen to input changes in order to set state. Afterwards state sets input value */}
             <input
               type="text"
               placeholder="Search by title or author"
@@ -28,8 +31,8 @@ class SearchPage extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
+          {/* Render SearchResults component, passing props */}
           <SearchResults
-            books={state.books}
             results={state.results}
             query={state.query}
             update={update}

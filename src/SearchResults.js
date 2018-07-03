@@ -2,17 +2,17 @@ import React from "react";
 
 class SearchResults extends React.Component {
   render() {
-    const { books, results, query, update } = this.props;
+    // Destructuring of props object
+    const { results, query, update } = this.props;
+
+    // Create empty array to store search results
     let displayResults = [];
 
+    // If results for query were found
     if (results.length > 0 && query !== "") {
+      // Map over all results and add each result to display array
       results.forEach(result => {
-        const booksMatch = books.filter(book => book.id === result.id);
-        if (booksMatch.length > 0) {
-          displayResults.push(...booksMatch);
-        } else {
-          displayResults.push(result);
-        }
+        displayResults.push(result);
       });
     }
 
@@ -22,6 +22,7 @@ class SearchResults extends React.Component {
           <li key={eachBook.id}>
             <div className="book">
               <div className="book-top">
+                {/* If book contains image links, render it's cover image */}
                 {eachBook.imageLinks && (
                   <img
                     src={eachBook.imageLinks.thumbnail}
@@ -30,6 +31,7 @@ class SearchResults extends React.Component {
                     style={{ width: 128 }}
                   />
                 )}
+                {/* If cover image is not found, render a simple placeholder */}
                 {!eachBook.imageLinks && (
                   <div
                     className="book-cover"
@@ -49,6 +51,7 @@ class SearchResults extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
+                  {/* If book is not on any shelf, give dropdown an empty value; otherwise set it's value to shelf name. On menu change, call the update props method to change shelf */}
                   <select
                     id={eachBook.id}
                     value={eachBook.shelf ? eachBook.shelf : "none"}
@@ -65,6 +68,7 @@ class SearchResults extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
+              {/* Books with multiple authors were concatenating results in one line. The fix is to map over authors array and output each result on it's own div */}
               {eachBook.authors &&
                 eachBook.authors.map(author => (
                   <div className="book-authors" key={author}>
