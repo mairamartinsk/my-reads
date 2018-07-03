@@ -34,6 +34,7 @@ class SearchPage extends React.Component {
         <div className="search-books-results">
           {/* Render SearchResults component, passing props */}
           <SearchResults
+            books={state.books}
             results={state.results}
             query={state.query}
             update={update}
