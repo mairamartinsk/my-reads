@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import RenderBooks from "./RenderBooks";
+import PropTypes from "prop-types";
 
 class Bookshelf extends React.Component {
   render() {
+    // Destructure props object
     const { state, update } = this.props;
 
+    // Filter books by shelf and store results in respective shelf variables
     let booksReading = state.books.filter(
       book => book.shelf === "currentlyReading"
     );
@@ -20,6 +23,8 @@ class Bookshelf extends React.Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
+          {/* The three sections below will render only if shelf is not empty.
+        The RenderBooks component then will be called passing a books state composed only of the books that are inside the rendered shelf. */}
           <div>
             {booksReading.length > 0 && (
               <div className="bookshelf">
@@ -60,5 +65,10 @@ class Bookshelf extends React.Component {
     );
   }
 }
+
+Bookshelf.propTypes = {
+  state: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  update: PropTypes.func
+};
 
 export default Bookshelf;

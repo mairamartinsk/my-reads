@@ -1,15 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class RenderBooks extends React.Component {
   render() {
+    // Destructure props object
     const { books, update } = this.props;
 
     return (
       <ol className="books-grid">
+        {/* Map over books state array and render each book's html */}
         {books.map(eachBook => (
           <li key={eachBook.id}>
             <div className="book">
               <div className="book-top">
+                {/* If book contains image links, render it's cover image */}
                 {eachBook.imageLinks && (
                   <img
                     src={eachBook.imageLinks.thumbnail}
@@ -18,6 +22,7 @@ class RenderBooks extends React.Component {
                     style={{ width: 128 }}
                   />
                 )}
+                {/* If cover image is not found, render a simple placeholder */}
                 {!eachBook.imageLinks && (
                   <div
                     className="book-cover"
@@ -37,6 +42,7 @@ class RenderBooks extends React.Component {
                   </div>
                 )}
                 <div className="book-shelf-changer">
+                  {/* If book is not on any shelf, give it an empty value; otherwise set the dropdown menu value to shelf name. On menu change, call the update props method to change shelf */}
                   <select
                     id={eachBook.id}
                     value={eachBook.shelf ? eachBook.shelf : "none"}
@@ -53,6 +59,7 @@ class RenderBooks extends React.Component {
                 </div>
               </div>
               <div className="book-title">{eachBook.title}</div>
+              {/* Books with multiple authors were concatenating results in one line. The fix is to map over authors array and output each result on it's own div */}
               {eachBook.authors &&
                 eachBook.authors.map(author => (
                   <div className="book-authors" key={author}>
@@ -66,5 +73,10 @@ class RenderBooks extends React.Component {
     );
   }
 }
+
+RenderBooks.propTypes = {
+  books: PropTypes.array.isRequired,
+  update: PropTypes.func
+};
 
 export default RenderBooks;

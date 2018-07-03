@@ -13,33 +13,33 @@ class BooksApp extends React.Component {
   };
 
   componentDidMount() {
+    // Retrieve all book data from API and populate state
     BooksAPI.getAll().then(data => {
       this.setState({ books: data });
     });
   }
 
   searchBooks = query => {
+    // Set query state to be the same as user input
     this.setState({ query: query });
 
     if (query.length > 0) {
+      // Retrieve query data from API and set state for search results
       BooksAPI.search(query).then(data => {
         this.setState({
           results: data
         });
       });
-    } else {
-      while (this.state.results.length > 0) {
-        this.state.results.pop();
-      }
-      this.setState(() => ({ query: "" }));
     }
   };
 
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
       this.setState(prevState => ({
+        // Filter all books in state to find correct book match
         books: prevState.books.filter(b => {
           if (b.id === book.id) {
+            // If book is found, set it's current shelf to a new one
             return (book.shelf = shelf);
           } else {
             return book;
