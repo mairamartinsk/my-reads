@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class SearchResults extends React.Component {
   render() {
@@ -82,5 +83,11 @@ class SearchResults extends React.Component {
     );
   }
 }
+
+SearchResults.propTypes = {
+  results: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  query: PropTypes.string.isRequired,
+  update: PropTypes.func
+};
 
 export default SearchResults;

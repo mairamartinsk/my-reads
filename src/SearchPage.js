@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchResults from "./SearchResults";
+import PropTypes from "prop-types";
 
 class SearchPage extends React.Component {
   // Simple method to clear input once user quits search page
@@ -42,5 +43,15 @@ class SearchPage extends React.Component {
     );
   }
 }
+
+SearchPage.propTypes = {
+  state: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object
+  ]).isRequired,
+  update: PropTypes.func,
+  search: PropTypes.func
+};
 
 export default SearchPage;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class RenderBooks extends React.Component {
   render() {
@@ -72,5 +73,10 @@ class RenderBooks extends React.Component {
     );
   }
 }
+
+RenderBooks.propTypes = {
+  books: PropTypes.array.isRequired,
+  update: PropTypes.func
+};
 
 export default RenderBooks;

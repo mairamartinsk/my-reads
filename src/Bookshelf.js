@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import RenderBooks from "./RenderBooks";
+import PropTypes from "prop-types";
 
 class Bookshelf extends React.Component {
   render() {
@@ -64,5 +65,10 @@ class Bookshelf extends React.Component {
     );
   }
 }
+
+Bookshelf.propTypes = {
+  state: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  update: PropTypes.func
+};
 
 export default Bookshelf;
